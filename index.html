@@ -1555,10 +1555,16 @@ _Bahia Construção_`;
         }
 
                 /* ===================================================
-           INICIALIZAÇÃO
+           INICIALIZAÇÃO ASSÍNCRONA
         =================================================== */
-        buscarNovosFornecedoresLocais();
-        renderisadorObrasPainel();
+        async function inicializar() {
+            try { await abrirDB(); } catch(e) { console.warn('IndexedDB indisponível'); }
+            await carregarTodosDados();
+            buscarNovosFornecedoresLocais();
+            renderisadorObrasPainel();
+            renderizarEquipe();
+        }
+        inicializar();
     </script>
 </body>
 </html>
